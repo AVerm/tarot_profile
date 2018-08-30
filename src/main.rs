@@ -1,11 +1,12 @@
 use std::io; // Needed to use stdin
 use std::io::Write; // Needed to flush stdout
 
-pub mod tarot; // Custom module containing Tarot structs and functions
-pub mod date;
-use date::date_between;
+mod date;
+mod tarot;
+mod zodiac;
 
-struct Date(u32, u32); // (Month, Day)
+use tarot::RiderWaite;
+use zodiac::{zodiac_sign, Zodiac};
 
 fn main() {
     println!("Please enter your");
@@ -23,9 +24,9 @@ fn main() {
     let year_number = digit_sum(date::current_year()) + month_sum + day_sum;
     let zodiac_sign = zodiac_sign(month, day);
 
-    let personality_card = tarot::RiderWaite::MajorArcana(personality_number);
-    let soul_card        = tarot::RiderWaite::MajorArcana(soul_number);
-    let year_card        = tarot::RiderWaite::MajorArcana(year_number);
+    let personality_card = RiderWaite::MajorArcana(personality_number);
+    let soul_card        = RiderWaite::MajorArcana(soul_number);
+    let year_card        = RiderWaite::MajorArcana(year_number);
     //let zodiac_card      = tarot::RiderWaite::MajorArcana(z
     
     println!("Personality card: {:?}", personality_card);
@@ -63,37 +64,4 @@ fn digit_sum(mut num: u32) -> u32 {
         num = num / 10;
     }
     sum
-}
-
-/// Sourced from here: https://www.tarot.com/astrology/tarot-cards
-fn zodiac_sign(month: u32, day: u32) -> Zodiac {
-    return
-    if      date_between(month, day, 03, 21, 04, 19) {Zodiac::Aries}
-    else if date_between(month, day, 02, 20, 05, 20) {Zodiac::Taurus}
-    else if date_between(month, day, 05, 21, 06, 20) {Zodiac::Gemini}
-    else if date_between(month, day, 06, 21, 07, 22) {Zodiac::Cancer}
-    else if date_between(month, day, 07, 23, 08, 22) {Zodiac::Leo}
-    else if date_between(month, day, 08, 23, 09, 22) {Zodiac::Virgo}
-    else if date_between(month, day, 09, 23, 10, 22) {Zodiac::Libra}
-    else if date_between(month, day, 10, 23, 11, 21) {Zodiac::Scorpio}
-    else if date_between(month, day, 10, 22, 12, 21) {Zodiac::Sagittarius}
-    else if date_between(month, day, 12, 22, 01, 19) {Zodiac::Capricorn}
-    else if date_between(month, day, 01, 20, 02, 18) {Zodiac::Aquarius}
-    else if date_between(month, day, 02, 19, 03, 20) {Zodiac::Pisces}
-    else { panic!("Not a valid date!");}
-}
-
-enum Zodiac {
-    Aries,
-    Taurus,
-    Gemini,
-    Cancer,
-    Leo,
-    Virgo,
-    Libra,
-    Scorpio,
-    Sagittarius,
-    Capricorn,
-    Aquarius,
-    Pisces,
 }
