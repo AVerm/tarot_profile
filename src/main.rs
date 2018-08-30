@@ -1,9 +1,11 @@
 use std::io; // Needed to use stdin
 use std::io::Write; // Needed to flush stdout
-use std::time::SystemTime;
 
 pub mod tarot; // Custom module containing Tarot structs and functions
-use tarot::*;
+pub mod date;
+use date::date_between;
+
+struct Date(u32, u32); // (Month, Day)
 
 fn main() {
     println!("Please enter your");
@@ -18,13 +20,18 @@ fn main() {
 
     let personality_number = year_sum + month_sum + day_sum;
     let soul_number = digit_sum(personality_number);
-    let year_number = digit_sum(current_year()) + month_sum + day_sum;
+    let year_number = digit_sum(date::current_year()) + month_sum + day_sum;
     let zodiac_sign = zodiac_sign(month, day);
 
     let personality_card = tarot::RiderWaite::MajorArcana(personality_number);
     let soul_card        = tarot::RiderWaite::MajorArcana(soul_number);
     let year_card        = tarot::RiderWaite::MajorArcana(year_number);
     //let zodiac_card      = tarot::RiderWaite::MajorArcana(z
+    
+    println!("Personality card: {:?}", personality_card);
+    println!("Soul card: {:?}", soul_card);
+    println!("Year card: {:?}", year_card);
+    //println!("Zodiac card: {}", zodiac_card);
 }
 
 fn get_input<T, E>(instructions: &str) -> T
@@ -58,22 +65,6 @@ fn digit_sum(mut num: u32) -> u32 {
     sum
 }
 
-/// Returns the current year based on an estimate using the seconds since 1970
-/// Panics if system time is set to before the unix epoch (January 1, 1970)
-/// Currently is naive about how many seconds are in a year
-fn current_year() -> u32 {
-    let seconds_since_epoch = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).expect("System time before January 1, 1970!");
-
-    let seconds_per_minute = 60;
-    let seconds_per_hour = 60 * seconds_per_minute;
-    let seconds_per_day = 24 * seconds_per_hour;
-    let seconds_per_year = 365 * seconds_per_day;
-
-    let year = 1970 + (seconds_since_epoch.as_secs() / seconds_per_year) as u32;
-
-    year
-}
-
 /// Sourced from here: https://www.tarot.com/astrology/tarot-cards
 fn zodiac_sign(month: u32, day: u32) -> Zodiac {
     return
@@ -105,8 +96,4 @@ enum Zodiac {
     Capricorn,
     Aquarius,
     Pisces,
-}
-
-fn date_between(month: u32, day: u32, month1: u32, day1: u32, month2: u32, day2: u32) -> bool {
-    (month == month1 && day >= day1) || (month == month2 && day <= day2)
 }
