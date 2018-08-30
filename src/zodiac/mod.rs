@@ -1,7 +1,5 @@
 use date::date_between;
 
-struct Date(u32, u32); // (Month, Day)
-
 /// Sourced from here: https://www.tarot.com/astrology/tarot-cards
 pub fn zodiac_sign(month: u32, day: u32) -> Zodiac {
     return
@@ -20,6 +18,7 @@ pub fn zodiac_sign(month: u32, day: u32) -> Zodiac {
     else { panic!("Not a valid date!");}
 }
 
+#[derive(Debug)]
 pub enum Zodiac {
     Aries,
     Taurus,

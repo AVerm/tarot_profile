@@ -15,24 +15,20 @@ fn main() {
     let month: u32 = get_input("\tBirth month (as a number): ");
     let day: u32 = get_input("\tBirth day (as a number): ");
 
-    let year_sum = digit_sum(year);
-    let month_sum = digit_sum(month);
-    let day_sum = digit_sum(day);
-
-    let personality_number = year_sum + month_sum + day_sum;
+    let personality_number = digit_sum(year + month + day);
     let soul_number = digit_sum(personality_number);
-    let year_number = digit_sum(date::current_year()) + month_sum + day_sum;
+    let year_number = digit_sum(date::current_year() + month + day);
     let zodiac_sign = zodiac_sign(month, day);
 
     let personality_card = RiderWaite::MajorArcana(personality_number);
     let soul_card        = RiderWaite::MajorArcana(soul_number);
     let year_card        = RiderWaite::MajorArcana(year_number);
-    //let zodiac_card      = tarot::RiderWaite::MajorArcana(z
-    
+    let zodiac_card      = tarot::zodiac_card(zodiac_sign);
+
     println!("Personality card: {:?}", personality_card);
     println!("Soul card: {:?}", soul_card);
     println!("Year card: {:?}", year_card);
-    //println!("Zodiac card: {}", zodiac_card);
+    println!("Zodiac card: {:?}", zodiac_card);
 }
 
 fn get_input<T, E>(instructions: &str) -> T
