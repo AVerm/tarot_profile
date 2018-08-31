@@ -5,8 +5,8 @@ mod date;
 mod tarot;
 mod zodiac;
 
-use tarot::RiderWaite;
-use zodiac::{zodiac_sign, Zodiac};
+use tarot::major_arcana_num;
+use zodiac::zodiac_sign;
 
 fn main() {
     println!("Please enter your");
@@ -20,9 +20,9 @@ fn main() {
     let year_number = digit_sum(date::current_year() + month + day);
     let zodiac_sign = zodiac_sign(month, day);
 
-    let personality_card = RiderWaite::MajorArcana(personality_number);
-    let soul_card        = RiderWaite::MajorArcana(soul_number);
-    let year_card        = RiderWaite::MajorArcana(year_number);
+    let personality_card = major_arcana_num(personality_number);
+    let soul_card        = major_arcana_num(soul_number);
+    let year_card        = major_arcana_num(year_number);
     let zodiac_card      = tarot::zodiac_card(zodiac_sign);
 
     println!("Personality card: {}", personality_card);
