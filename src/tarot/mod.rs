@@ -1,11 +1,13 @@
 use std::fmt;
 use super::zodiac::Zodiac;
 
+#[allow(dead_code)]
 pub enum RiderWaite {
     MajorArcana(MajorArcana),
     MinorArcana(Suit, Rank),
 }
 
+#[allow(dead_code)]
 pub enum MajorArcana {
     Fool,
     Magician,
@@ -31,6 +33,7 @@ pub enum MajorArcana {
     World,
 }
 
+#[allow(dead_code)]
 pub enum Suit {
     Wands,
     Cups,
@@ -38,6 +41,7 @@ pub enum Suit {
     Gold,
 }
 
+#[allow(dead_code)]
 pub enum Rank {
     One,
     Two,
@@ -56,7 +60,7 @@ pub enum Rank {
 }
 
 /// Sourced from here: https://www.tarot.com/astrology/tarot-cards
-pub fn zodiac_card(zodiac_sign: Zodiac) -> RiderWaite {
+pub fn zodiac_card(zodiac_sign: &Zodiac) -> RiderWaite {
     RiderWaite::MajorArcana (
         match zodiac_sign {
             Zodiac::Aries       => MajorArcana::Emporer,

@@ -23,7 +23,7 @@ fn main() {
     let personality_card = major_arcana_num(personality_number);
     let soul_card        = major_arcana_num(soul_number);
     let year_card        = major_arcana_num(year_number);
-    let zodiac_card      = tarot::zodiac_card(zodiac_sign);
+    let zodiac_card      = tarot::zodiac_card(&zodiac_sign);
 
     println!("Personality card: {}", personality_card);
     println!("Soul card: {}", soul_card);
@@ -36,7 +36,7 @@ where T: Sized + std::str::FromStr<Err=E>,
       E: std::fmt::Debug,
 {
     print!("{}", instructions);
-    io::stdout().flush().ok().expect("Could not flush stdout");
+    io::stdout().flush().expect("Could not flush stdout");
 
     let mut input = "".to_owned();
     let mut num: Result<T, <T as std::str::FromStr>::Err>;
@@ -56,8 +56,8 @@ fn digit_sum(mut num: u32) -> u32 {
     while num != 0
     {
         remainder = num % 10;
-        sum = sum + remainder;
-        num = num / 10;
+        sum += remainder;
+        num /= 10;
     }
     sum
 }
