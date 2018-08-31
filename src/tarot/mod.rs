@@ -61,16 +61,16 @@ impl fmt::Display for RiderWaite {
                 _ => "0. THE FOOL",
             }.to_owned(),
             RiderWaite::MinorArcana(suit, number) => {
-                let rank = match suit {
+                let suite_string = match suit {
                     Suit::Wands  => "Wands",
                     Suit::Cups   => "Cups",
                     Suit::Swords => "Swords",
                     Suit::Gold   => "Gold",
                 };
-                let suit_string = match number {
+                let rank = match number {
                     _ => "22",
                 };
-                format!("{} OF {}", rank, suit_string)
+                format!("{} OF {}", rank, suite_string)
             },
         };
 
