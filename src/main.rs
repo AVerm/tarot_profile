@@ -11,9 +11,9 @@ use zodiac::zodiac_sign;
 fn main() {
     println!("Please enter your");
 
-    let year: u32 = get_input("\tBirth year (as a number): ");
+    let year:  u32 = get_input("\tBirth year (as a number): ");
     let month: u32 = get_input("\tBirth month (as a number): ");
-    let day: u32 = get_input("\tBirth day (as a number): ");
+    let day:   u32 = get_input("\tBirth day (as a number): ");
 
     let personality_number = digit_sum(year + month + day);
     let soul_number = digit_sum(personality_number);
@@ -35,13 +35,13 @@ fn get_input<T, E>(instructions: &str) -> T
 where T: Sized + std::str::FromStr<Err=E>,
       E: std::fmt::Debug,
 {
-    print!("{}", instructions);
-    io::stdout().flush().expect("Could not flush stdout");
-
-    let mut input = "".to_owned();
+    let mut input = "".to_string();
     let mut num: Result<T, <T as std::str::FromStr>::Err>;
 
     while { // This loop uses a dirty hack to emulate a do-while loop. Details at https://gist.github.com/huonw/8435502
+        print!("{}", instructions);
+        io::stdout().flush().expect("Could not flush stdout");
+        input = "".to_string();
         let _ = io::stdin().read_line(&mut input);
         num = input.trim_right().parse::<T>();
         num.is_err()
