@@ -25,12 +25,15 @@ fn main() {
     let year_card        = major_arcana_num(year_number);
     let zodiac_card      = tarot::zodiac_card(&zodiac_sign);
 
-    println!("Personality card: {}", personality_card);
-    println!("Soul card: {}", soul_card);
-    println!("Year card: {}", year_card);
-    println!("Zodiac card: {}", zodiac_card);
+    println!();
+    println!("Personality card:\t{}", personality_card);
+    println!("Soul card:\t\t{}", soul_card);
+    println!("Year card:\t\t{}", year_card);
+    println!("Zodiac card:\t\t{}", zodiac_card);
 }
 
+/// Given an instruction string, prints the string and reads input from the command line,
+/// attempting to cast from a string to the target type. Loops until valid output is possible.
 fn get_input<T, E>(instructions: &str) -> T
 where T: Sized + std::str::FromStr<Err=E>,
       E: std::fmt::Debug,
@@ -50,6 +53,10 @@ where T: Sized + std::str::FromStr<Err=E>,
     num.expect("Loop in get_input exited with error state, should not be possible")
 }
 
+/// Utility function that sums the digits of a number
+/// ```
+/// assert_eq!(digit_sum(1234), 10);
+/// ```
 fn digit_sum(mut num: u32) -> u32 {
     let mut remainder;
     let mut sum = 0;

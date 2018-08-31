@@ -18,6 +18,7 @@ pub fn zodiac_sign(month: u32, day: u32) -> Zodiac {
 }
 
 #[derive(Debug)]
+/// Enum representing the 12 traditional Zodiac signs
 pub enum Zodiac {
     Aries,
     Taurus,

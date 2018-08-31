@@ -1,13 +1,16 @@
-use std::fmt;
-use super::zodiac::Zodiac;
+use std::fmt; // Needed to write custom printing methods for the cards
+use super::zodiac::Zodiac; // Needed to write the Zodiac -> zodiac card function
 
 #[allow(dead_code)]
+/// Enum representing a Tarot card from the 78-card Rider-Waite deck
 pub enum RiderWaite {
     MajorArcana(MajorArcana),
     MinorArcana(Suit, Rank),
 }
 
 #[allow(dead_code)]
+/// Enum representing the 21 cards of the Major Arcana plus the Fool (clearly not Minor Arcana) in
+/// the Rider-Waite deck
 pub enum MajorArcana {
     Fool,
     Magician,
@@ -34,6 +37,7 @@ pub enum MajorArcana {
 }
 
 #[allow(dead_code)]
+/// Enum representing the 4 suites in the Rider-Waite deck
 pub enum Suit {
     Wands,
     Cups,
@@ -42,6 +46,7 @@ pub enum Suit {
 }
 
 #[allow(dead_code)]
+/// Enum represeting the 13 ranks in each suite in the Rider-Waite deck
 pub enum Rank {
     One,
     Two,
@@ -59,6 +64,8 @@ pub enum Rank {
     King,
 }
 
+/// Takes a Zodiac sign by reference and returns a RiderWaite representing that zodiac sign's
+/// zodiac card
 /// Sourced from here: https://www.tarot.com/astrology/tarot-cards
 pub fn zodiac_card(zodiac_sign: &Zodiac) -> RiderWaite {
     RiderWaite::MajorArcana (
@@ -79,6 +86,7 @@ pub fn zodiac_card(zodiac_sign: &Zodiac) -> RiderWaite {
     )
 }
 
+/// Returns a Major Arcana card given a number, using the numbers printed on the cards
 pub fn major_arcana_num(num: u32) -> RiderWaite {
     RiderWaite::MajorArcana (
         match num {
