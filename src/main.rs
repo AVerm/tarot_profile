@@ -25,10 +25,10 @@ fn main() {
     let year_card        = RiderWaite::MajorArcana(year_number);
     let zodiac_card      = tarot::zodiac_card(zodiac_sign);
 
-    println!("Personality card: {:?}", personality_card);
-    println!("Soul card: {:?}", soul_card);
-    println!("Year card: {:?}", year_card);
-    println!("Zodiac card: {:?}", zodiac_card);
+    println!("Personality card: {}", personality_card);
+    println!("Soul card: {}", soul_card);
+    println!("Year card: {}", year_card);
+    println!("Zodiac card: {}", zodiac_card);
 }
 
 fn get_input<T, E>(instructions: &str) -> T
